@@ -163,8 +163,6 @@ The dashboard design initially included a global map showing share of energy pro
 In addition, the dahsboard line chart of renewable production over time had multiple lines, one for each renewable. This meant that forecasting trends on the dashboard tool was not included, as forecasting with multiple lines is not yet possible on PowerBI. However, line charts showing the forecast predictions from the RNN models were generated using Python visualisations, and therefore the business requirements were still met.
 
 ## Development Roadmap
-* What challenges did you face, and what strategies were used to overcome these challenges?
-* What new skills or tools do you plan to learn next based on your project experience? 
 
 Optimisation of the RNN models proved challenging as this was a new technique. A combination of Copilot suggestions and web searches was used to try to optmise the models. In the future, I would like to make further improvements to these models, and learn how to build a model of multiple time series using renewables combined together. 
 
