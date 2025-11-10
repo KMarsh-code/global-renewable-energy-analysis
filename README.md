@@ -4,6 +4,21 @@ This repository contains all of the files and documentation associated with the 
 
 # Contents
 
+* [Dataset Content](#dataset-content)
+* [Business Requirements](#business-requirements)
+* [Hypotheses and Validation](#hypotheses-and-validation)
+* [Project Plan](#project-plan)
+* [Rationale](#the-rationale-to-map-the-business-requirements-to-the-data-visualisations)
+* [Analysis Techniques](#analysis-techniques-used)
+* [Conclusions and Further Insights](#conclusions-and-further-insights)
+* [Ethical Considerations](#ethical-considerations)
+* [Dashboard Design](#dashboard-design)
+* [Unfixed Bugs](#unfixed-bugs)
+* [Development Roadmap](#development-roadmap)
+* [Main Libraries](#main-libraries)
+* [Credits](#credits)
+* [Acknowledgements](#acknowledgements)
+
 # Project Links
 * [ReadMe](https://github.com/KMarsh-code/global-renewable-energy-analysis/blob/main/README.md)
 * [Kanban Board](https://github.com/users/KMarsh-code/projects/5)
@@ -12,12 +27,12 @@ This repository contains all of the files and documentation associated with the 
 * [Dashboard](https://github.com/KMarsh-code/global-renewable-energy-analysis/tree/main/dashboard)
 
 ## Dataset Content
-The Global Renewable Energy dataset is freely available on [Kaggle](https://www.kaggle.com/datasets/pralabhpoudel/world-energy-consumption), and is maintained by [Our World in Data](https://ourworldindata.org/energy). This dataset contains a collection of key metrics on energy production and consumption from different sources for countries around the world dating from 1900-2022 (world_energy_consumption_raw.csv). For the purposes of this project, this dataset underwent preprocessing including extraction of key metrics, and was limited to 1982-2022. After this preprocessing, the dataset contained 45 columns and 8508 rows, with one row per country per year (world_energy_consumption_cleaned.csv). Data on production and consumption of solar, wind, hydro, biofuel, nuclear and fossils (coal, oil and gas combined) were used in the analyses and visualisations. A description of each column in the 'cleaned' dataset is available [here](). In addition, a summary dataset of averages and totals over the last five years per country was created for use in analyses and dashboard creation (world_energy_consumption_last5_summary.csv).
+The Global Renewable Energy dataset is freely available on [Kaggle](https://www.kaggle.com/datasets/pralabhpoudel/world-energy-consumption), and is compiled and maintained by [Our World in Data](https://ourworldindata.org/energy). This dataset contains a collection of key metrics on energy production and consumption from different sources for countries around the world dating from 1900-2022 (world_energy_consumption_raw.csv). For the purposes of this project, this dataset underwent preprocessing including extraction of key metrics, and was limited to 1982-2022. After this preprocessing, the dataset contained 45 columns and 8508 rows, with one row per country per year (world_energy_consumption_cleaned.csv). Data on production and consumption of solar, wind, hydro, biofuel, nuclear and fossils (coal, oil and gas combined) were used in the analyses and visualisations. A description of each column in the 'cleaned' dataset is available [here](). In addition, a summary dataset of averages and totals over the last five years per country was created for use in analyses and dashboard creation (world_energy_consumption_last5_summary.csv).
 
 ## Business Requirements
 An environmental NGO is running a campaign for sustainable futures, with the aim of increasing awareness of the state of the renewable energy market globally. This project will create a report on global trends in renewable energy, revealing global leaders in the green energy transition and predicting future trends. This will be in form of an interactive tool that will be shared with the public for engagement and awareness, as well as machine learning models to predict future trends.
 
-## Hypotheses and validation
+## Hypotheses and Validation
 
 **H1: Historical growth in renewables is linked to a country's gross domestic product (GDP)**. Countries with higher GDP have slower growth in fossil fuel consumption (they already peaked) and faster growth in renewables. In contrast, emerging economies (those with lower GDP) still show strong growth in fossil fuel consumption.
 
@@ -51,8 +66,8 @@ Testing and visualisations:
 * A **Dashboard tool** was created using PowerBI, in order to meet the business requirements of public engagement. PowerBI was chosen as it is a popular dashboarding tool, with advanced but intuitive data storytelling facilities. The dashboard is publicly available on the PowerBI platform [here](https://app.powerbi.com/groups/me/reports/e044f3b9-ae9e-41b9-8a21-ea4ddea0c84e/914eeb55aceefcad59e5?experience=power-bi).
 
 
-## The rationale to map the business requirements to the Data Visualisations
-The business requirements were two-fold: 1) forecast future trends in global renewables and 2) create an interactive tool providing insight into the state of the global energy market aimed at increasing public awareness. 
+## Rationale
+The business requirements were two-fold: **1)** forecast future trends in global renewables and **2)** create an interactive tool providing insight into the state of the global energy market aimed at increasing public awareness. 
 
 The following visualisations were used to meet these business requirements:
 * Line graphs show historic trends and 10-year forecasts in global energy production per renewable type (predictions from machine learning models).
@@ -60,7 +75,7 @@ The following visualisations were used to meet these business requirements:
 * Barplots highlight the countries that are 'leaders' in the green energy transition.
 * Scatterplots show the relationship between a country or region's economic state (GDP) and investment in renewables, giving additional context.
 
-## Analysis techniques used
+## Analysis Techniques
 All data analyses were performed in Python (version 3.12.10) via VScode. 
 
 Data Analysis Methods:
@@ -74,7 +89,7 @@ A lot of data was missing for certain years and/or countries. The analyses and d
 
 Generative AI (Copilot) was used for code completion and in-line fixes of errors. The chat function was used to provide suggestions for optimising forecast models.
 
-## Conclusions and further insights
+## Conclusions and Further Insights
 
 **H1:** The analyses show that growth in fossil and renewable energy is not strongly linked to a country's GDP (in terms of averages per country over the last 5 years). Some countrys show more overall growth in fossil/renewables than others. For instance, Indonesia and Vietnam have shown the highest average growth in fossil fuel over the last 5 years (between 5-6% per annum on average). Indonesia also has some of the higest average annual growth in renewables of over 20%, along with countries such as Israel, Iraq and Netherlands.
 
@@ -94,7 +109,7 @@ The forecast models (H3) could provide further insights by adding the following 
 Further insights could be provided by obtaining data on renewable policies and targets per country, as well as investment for building capacity. 
 
 
-## Ethical considerations
+## Ethical Considerations
 
 The data is publicly available on Kaggle and does not contain any personally identifiable data.
 
@@ -145,34 +160,36 @@ The dashboard was designed with a clear flow of information, consistent colour s
 
 The dashboard design initially included a global map showing share of energy production from renewables, with a play axis of year to visualise spatio-temporal trends. However, map features were not enabled on the PowerBI account and therefore were not accessible. Instead, a piechart of share in energy production was combined with a drop-down selection of geographic area and a slider for year.
 
-In addition, the dhasboard line chart of renewable production over time had multiple lines, one for each renewable. This meant that forecasting trends on the dashboard tool was not included, as forecasting with multiple lines is not yet possible on PowerBI. However, line charts showing the forecast predictions from the RNN models were generated using Pythonh visualisations, and therefore the business requirements were still met.
+In addition, the dahsboard line chart of renewable production over time had multiple lines, one for each renewable. This meant that forecasting trends on the dashboard tool was not included, as forecasting with multiple lines is not yet possible on PowerBI. However, line charts showing the forecast predictions from the RNN models were generated using Python visualisations, and therefore the business requirements were still met.
 
 ## Development Roadmap
 * What challenges did you face, and what strategies were used to overcome these challenges?
 * What new skills or tools do you plan to learn next based on your project experience? 
 
+Optimisation of the RNN models proved challenging as this was a new technique. A combination of Copilot suggestions and web searches was used to try to optmise the models. In the future, I would like to make further improvements to these models, and learn how to build a model of multiple time series using renewables combined together. 
 
-## Main Data Analysis Libraries
-* Here you should list the libraries you used in the project and provide an example(s) of how you used these libraries.
+## Main Libraries
 
+Data cleaning and EDA:
+- pandas
+- numpy
+
+Visualisations:
+- matplotlib
+- seaborn
+- plotly
+
+Machine learning:
+- scikitlearn
+- pytorch
 
 ## Credits 
 
-* In this section, you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism. 
-* You can break the credits section up into Content and Media, depending on what you have included in your project. 
+- Code institute learning materials were used as a basis for the data analyses in this project. In addition, Code Institute GitHub repository template was used to form the basis of this repository.
+ - This tutorial was followed for time series forecasting with RNN in Pytorch: https://www.geeksforgeeks.org/data-analysis/time-series-forecasting-using-pytorch/
+ - This page was followed for hyperparameter tuning: https://stackoverflow.com/questions/77007252/how-to-perform-hyperparameter-tuning-of-lstm-using-gridsearchcv
+- Further optimisations for each forecast model were done using Copilot chat suggestions.
 
-### Content 
+## Acknowledgements
 
-- The text for the Home page was taken from Wikipedia Article A
-- Instructions on how to implement form validation on the Sign-Up page was taken from [Specific YouTube Tutorial](https://www.youtube.com/)
-- The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
-
-### Media
-
-- The photos used on the home and sign-up page are from This Open-Source site
-- The images used for the gallery page were taken from this other open-source site
-
-
-
-## Acknowledgements (optional)
-* Thank the people who provided support through this project.
+Thank you to the Code Institute instructors and fellow coursemates for their encouragement and companionship during this process.
