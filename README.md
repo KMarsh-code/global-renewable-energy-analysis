@@ -1,25 +1,55 @@
 # Global Renewable Energy Analysis
 
-**Project XYZ** is a comprehensive data analysis tool designed to streamline data exploration, analysis, and visualisation. The tool supports multiple data formats and provides an intuitive interface for both novice and expert data scientists.
+This repository contains all of the files and documentation associated with the **Global Renewable Energy Analysis** project. The aims are to provide data insights in the form of analyses and an interactive dashboard to be used as a tool for stakeholders in order to meet their business requirements, as detailed below.
 
+# Contents
 
-
+# Project Links
+* [ReadMe](https://github.com/KMarsh-code/global-renewable-energy-analysis/blob/main/README.md)
+* [Kanban Board](https://github.com/users/KMarsh-code/projects/5)
+* [Datasets](https://github.com/KMarsh-code/global-renewable-energy-analysis/tree/main/data)
+* [Jupyter Notebooks](https://github.com/KMarsh-code/global-renewable-energy-analysis/tree/main/jupyter_notebooks)
+* [Dashboard](https://github.com/KMarsh-code/global-renewable-energy-analysis/tree/main/dashboard)
 
 ## Dataset Content
-* Describe your dataset. Choose a dataset of reasonable size to avoid exceeding the repository's maximum size of 100Gb.
-
+The Global Renewable Energy dataset is freely available on [Kaggle](https://www.kaggle.com/datasets/pralabhpoudel/world-energy-consumption), and is maintained by [Our World in Data](https://ourworldindata.org/energy). This dataset contains a collection of key metrics on energy production and consumption from different sources for countries around the world dating from 1900-2022 (world_energy_consumption_raw.csv). For the purposes of this project, this dataset underwent preprocessing including extraction of key metrics, and was limited to 1982-2022. After this preprocessing, the dataset contained 45 columns and 8508 rows, with one row per country per year (world_energy_consumption_cleaned.csv). Data on production and consumption of solar, wind, hydro, biofuel, nuclear and fossils (coal, oil and gas combined) were used in the analyses and visualisations. A description of each column in the 'cleaned' dataset is available [here](). In addition, a summary dataset of averages and totals over the last five years per country was created for use in analyses and dashboard creation (world_energy_consumption_last5_summary.csv).
 
 ## Business Requirements
-* Describe your business requirements
+An environmental NGO is running a campaign for sustainable futures, with the aim of increasing awareness of the state of the renewable energy market globally. This project will create a report on global trends in renewable energy, revealing global leaders in the green energy transition and predicting future trends. This will be in form of an interactive tool that will be shared with the public for engagement and awareness, as well as machine learning models to predict future trends.
 
+## Hypotheses and validation
 
-## Hypothesis and how to validate?
-* List here your project hypothesis(es) and how you envision validating it (them) 
+**H1: Historical growth in renewables is linked to a country's gross domestic product (GDP)**. Countries with higher GDP have slower growth in fossil fuel consumption (they already peaked) and faster growth in renewables. In contrast, emerging economies (those with lower GDP) still show strong growth in fossil fuel consumption.
+
+Testing and visualisations:
+
+- Jupyter Notebook: Scatterplot of fossil and renewable energy percentage annual growth against GDP per country (averaged over the last 5 years). OLS regression to test hypothesis of fossil/renewable growth relationship with GDP.
+
+- Dashboard: Dynamic scatterplot of fossil fuel consumption against GDP per sub-region, with a play axis of year to show changes over time.
+
+**H2: Leaders and laggers in the green energy transition**. Renewable production has increased over the last decade, accelerating the transition to green energy. The rate of this growth varies geographically, with some countries leading the way in the green energy transition and other countries falling behind.
+
+Testing and visualisations:
+
+- Jupyter Notebook: Histograms of share of electricity production per energy type (averaged over the last 5 years per country). Identification of outlier countries, and barplots of 'leaders' and 'laggers' per energy type.
+
+- Dashboard: Barplots of percentage share of energy production per country (averaged over the last 5 years), showing all countries (not just leaders/laggers).
+
+**H3: Forecasting renewable production for the next decade**. Renewables have been rising over the last two decades, with growth in some renewables like solar and wind especially fast in the last 10 years. Production of renewables will continue to increase over the next ten years, accelerating the shift from fossil to green energy. 
+
+Testing and visualisations:
+
+- Jupyter Notebook: Forecasting global trends in energy production per renewable type over the next 10 years using machine learning methods (Recurrent Neural Network). 
+
+- Dashboard: Piechart of percentage share in energy production per energy source (including fossil fuel). Line graph of energy production over time per renewable type. 
 
 ## Project Plan
-* Outline the high-level steps taken for the analysis.
-* How was the data managed throughout the collection, processing, analysis and interpretation steps?
-* Why did you choose the research methodologies you used?
+
+* **Data cleaning and preprocessing** was conducted in Python to improve the relevance and quality for downstream analyses. The code for this is available [here](https://github.com/KMarsh-code/global-renewable-energy-analysis/blob/main/jupyter_notebooks/1_renewable_energy_data_cleaning_eda.ipynb), the cleaned dataset is stored [here](https://github.com/KMarsh-code/global-renewable-energy-analysis/blob/main/data/world_energy_consumption_cleaned.csv) and the 5-year summary dataset is [here](https://github.com/KMarsh-code/global-renewable-energy-analysis/blob/main/data/world_energy_consumption_last5_summary.csv).
+* **Exploratory Data Analysis (EDA)** was performed in Python to provide key summary statistics per vairable, to understand their distributions and to obtain initial insights of variable correlations and broad patterns. The code for this is available [here](https://github.com/KMarsh-code/global-renewable-energy-analysis/blob/main/jupyter_notebooks/1_renewable_energy_data_cleaning_eda.ipynb).
+* **Hypothesis testing** was performed in Python, which enabled advanced tools such as machine learning (RNN) for forecasting to be used to meet business requirements. The code for these analyses is available [here](https://github.com/KMarsh-code/global-renewable-energy-analysis/blob/main/jupyter_notebooks/2_renewable_energy_hypothesis_testing.ipynb).
+* A **Dashboard tool** was created using PowerBI, in order to meet the business requirements of public engagement. PowerBI was chosen as it is a popular dashboarding tool, with advanced but intuitive data storytelling facilities. The dashboard is publicly available on the PowerBI platform [here](https://app.powerbi.com/groups/me/reports/e044f3b9-ae9e-41b9-8a21-ea4ddea0c84e/914eeb55aceefcad59e5?experience=power-bi).
+
 
 ## The rationale to map the business requirements to the Data Visualisations
 * List your business requirements and a rationale to map them to the Data Visualisations
@@ -29,6 +59,9 @@
 * How did you structure the data analysis techniques. Justify your response.
 * Did the data limit you, and did you use an alternative approach to meet these challenges?
 * How did you use generative AI tools to help with ideation, design thinking and code optimisation?
+
+## Summary of findings
+
 
 ## Ethical considerations
 * Were there any data privacy, bias or fairness issues with the data?
@@ -48,20 +81,6 @@
 ## Development Roadmap
 * What challenges did you face, and what strategies were used to overcome these challenges?
 * What new skills or tools do you plan to learn next based on your project experience? 
-
-## Deployment
-### Heroku
-
-* The App live link is: https://YOUR_APP_NAME.herokuapp.com/ 
-* Set the runtime.txt Python version to a [Heroku-20](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
-* The project was deployed to Heroku using the following steps.
-
-1. Log in to Heroku and create an App
-2. From the Deploy tab, select GitHub as the deployment method.
-3. Select your repository name and click Search. Once it is found, click Connect.
-4. Select the branch you want to deploy, then click Deploy Branch.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click now the button Open App on the top of the page to access your App.
-6. If the slug size is too large then add large files not required for the app to the .slugignore file.
 
 
 ## Main Data Analysis Libraries
