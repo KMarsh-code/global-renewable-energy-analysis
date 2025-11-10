@@ -52,31 +52,100 @@ Testing and visualisations:
 
 
 ## The rationale to map the business requirements to the Data Visualisations
-* List your business requirements and a rationale to map them to the Data Visualisations
+The business requirements were two-fold: 1) forecast future trends in global renewables and 2) create an interactive tool providing insight into the state of the global energy market aimed at increasing public awareness. 
+
+The following visualisations were used to meet these business requirements:
+* Line graphs show historic trends and 10-year forecasts in global energy production per renewable type (predictions from machine learning models).
+* Piechart showing share of electricity production per energy source (including fossil fuel) gives an overview of the state of the energy market.
+* Barplots highlight the countries that are 'leaders' in the green energy transition.
+* Scatterplots show the relationship between a country or region's economic state (GDP) and investment in renewables, giving additional context.
 
 ## Analysis techniques used
-* List the data analysis methods used and explain limitations or alternative approaches.
-* How did you structure the data analysis techniques. Justify your response.
-* Did the data limit you, and did you use an alternative approach to meet these challenges?
-* How did you use generative AI tools to help with ideation, design thinking and code optimisation?
+All data analyses were performed in Python (version 3.12.10) via VScode. 
 
-## Summary of findings
+Data Analysis Methods:
+- OLS regression was used to test Hypothesis 1 (growth in renewables/fossils vs GDP). 
+- Identification of outliers was done by calculating 1.5*interquartile range per energy type
+- Forecasting renewable production was done using Recurrent Neural Networks, specifically long short-term memory (LSTM) models which are particularly suited to time series forecasts as they retain memory over longer periods. 
+
+Data Limitations:
+
+A lot of data was missing for certain years and/or countries. The analyses and dashboard therefore focussed on years with more complete records (1980's onwards), and for some analyses (e.g. forecasts) global trends were considered by summing available data across countries.
+
+Generative AI (Copilot) was used for code completion and in-line fixes of errors. The chat function was used to provide suggestions for optimising forecast models.
+
+## Conclusions and further insights
+
+**H1:** The analyses show that growth in fossil and renewable energy is not strongly linked to a country's GDP (in terms of averages per country over the last 5 years). Some countrys show more overall growth in fossil/renewables than others. For instance, Indonesia and Vietnam have shown the highest average growth in fossil fuel over the last 5 years (between 5-6% per annum on average). Indonesia also has some of the higest average annual growth in renewables of over 20%, along with countries such as Israel, Iraq and Netherlands.
+
+**H2:** Different sets of countries were identified as leaders in the transition to green energy, depending on the type of renewable (based on the average share of energy production per country over the last 5 years). The leaders for each energy type were; The Cook Islands (Solar), Denmark (Wind), Eswatiti (Biofuel), France (Nuclear). Multiple countries were 100% reliant on hydropower for their energy production (Bhutan, Central African Republic, Lesotho, Paraguay, Democratic Republic of Congo, Albania and Nepal).
+
+**H3:** There has been an increase in renewable energy production over the last two decades, with this growth set to continue over the next 10 years. The models built here predict growth in each renewable type, despite sudden drops in production for all renewables between 2021-2022 (possibly covid-related). Hydropower is dominant, with production set to increase to approximately 240,000 kWh by 2032. Wind production is predicted to overtake nuclear power, with estimates of 150,000 kWh for wind vs 63,000 kWh for nuclear in 2032. This is due to the decrease in nuclear production since the early 2000's, which will take the next 10 years to recover. Biofuel production has been steadily increasing since 1990, and will continue this gradual increase to approxiamte 25,000 kWh by 2032. In contrast, solar production has grown exponentially since 2010 and will overtake biofuel production with estimates of 90,000 kWh production by 2032.
+
+**Further Insights**
+
+The link between growth in fossil/renewables and GDP (H1) could be further explored by testing if this relationship depends on sub-region. This could highlight the differences between developed and emerging economies in terms of the link between energy consumption/growth and GDP.
+
+The forecast models (H3) could provide further insights by adding the following to the analyses:
+- Further model optimisation to capture most recent trends. Perhaps removing the last year (2022) if it is an anomaly due to covid (this would require further investigation and validation).
+- Add more independent variables to the models to aid predictions, such as predicting growth per sub-region.
+- Combine growth in production of all renewables into a multiple time series to improve forecasts.
+
+Further insights could be provided by obtaining data on renewable policies and targets per country, as well as investment for building capacity. 
 
 
 ## Ethical considerations
-* Were there any data privacy, bias or fairness issues with the data?
-* How did you overcome any legal or societal issues?
+
+The data is publicly available on Kaggle and does not contain any personally identifiable data.
+
+During data cleaning, a dictionary of countries with the continent and sub-region they belong to was created according to the UN classification (https://unstats.un.org/unsd/methodology/m49/). These groupings are for statistical purposes and do not imply any political affiliations. 
 
 ## Dashboard Design
-* List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other item that your dashboard library supports.
-* Later, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but subsequently you used another plot type).
-* How were data insights communicated to technical and non-technical audiences?
-* Explain how the dashboard was designed to communicate complex data insights to different audiences. 
+
+**1. Main Dashboard**
+* Title: Global Renewable Energy 1982-2022
+* Cards: Average % annual growth in each energy source
+* Piechart: % share of electricity generation per energy source
+* Scatterplot: Fossil fuel consumption vs GDP per sub-region. Includes a play axis of year for enhanced understanding of the temporal dynamics of this relationship.
+* Barplots: Average % share of total energy production per country, per energy source.
+* Line chart: Energy production per capita over time, with one line for each renewable. Includes buttons to show trends per continent.
+* Filters: Year slider and drop-down selection of continent/sub-region to allow drill-down.
+* Reset button to remove all filters and selections
+
+
+**2. Fossil fuel vs. GDP**
+
+Focus: Displays the correlation between fossil fuel consumption (kWh) per capita and GDP per geographic sub-region.
+
+Elements: Scatter plot with play axis of year, datapoints coloured and labelled by sub-region. GDP is log-transformed to enhance visibility. 
+
+**3. Green Leaders**
+
+Focus: Shows which countries are leading in terms of % share of their energy production coming from each type of renewable.
+
+Elements: Barplots, one per renewable type, showing % share of total energy production per country (averaged over the last 5 years). Bars are coloured by renewable type and ordered by decreasing % share.
+
+**4. Renewable Growth**
+
+Focus: Shows trends in renewables over time (energy production per capita).
+
+Elements: Line chart with trendlines per renewable type. Colour= renewable type. Buttons allow drill-down to see trends per continent.
+
+**5. Geographic Patterns**
+
+Focus: Shows % share of electricity production per energy source, including fossil fuels.
+
+Elements: Piechart of % share in electricity production. Colour=energy source. Drop-down selection of continent and sub-region and a slider for year allows drill-down of geographic and temporal patterns.
+
+**Communication Strategy:**
+
+The dashboard was designed with a clear flow of information, consistent colour scheme, clear titles per section and filters to allow drill-down. The charts on the main dashboard were split into separate pages to allow the audience to focus on one at a time, for a clearer viewing experience. Cards were placed at the top of the main dashboard to give quick summary statistcs in an easy-to-see position.
 
 ## Unfixed Bugs
-* Please mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a significant variable to consider, paucity of time and difficulty understanding implementation are not valid reasons to leave bugs unfixed.
-* Did you recognise gaps in your knowledge, and how did you address them?
-* If applicable, include evidence of feedback received (from peers or instructors) and how it improved your approach or understanding.
+
+The dashboard design initially included a global map showing share of energy production from renewables, with a play axis of year to visualise spatio-temporal trends. However, map features were not enabled on the PowerBI account and therefore were not accessible. Instead, a piechart of share in energy production was combined with a drop-down selection of geographic area and a slider for year.
+
+In addition, the dhasboard line chart of renewable production over time had multiple lines, one for each renewable. This meant that forecasting trends on the dashboard tool was not included, as forecasting with multiple lines is not yet possible on PowerBI. However, line charts showing the forecast predictions from the RNN models were generated using Pythonh visualisations, and therefore the business requirements were still met.
 
 ## Development Roadmap
 * What challenges did you face, and what strategies were used to overcome these challenges?
